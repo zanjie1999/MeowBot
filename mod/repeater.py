@@ -2,7 +2,7 @@
 
 # Sparkle Meow Bot
 # repeater 复读机模块
-# v1.0
+# v2.0
 
 
 whiteList = []
@@ -22,24 +22,35 @@ naturalWord = ['我渴望', '吾乃', '之王者', '辣鸡', '没想到你是这
 async def repeater(bot, context):
     if context:
         if context['message_type'] == 'private':
-            # 私聊
+            # 私聊 无脑复读
             await bot.send(context, context['message'])
             print('私聊复读', context['sender']['nickname'], context['message'])
         elif context['message_type'] == 'group':
-            # 群聊
-            # 黑白名单
-            if (not blackList or context['group_id'] not in blackList) and (not whiteList or context['group_id'] in whiteList):
-                flag = False
-                msg = context['message'].lower()
-                if msg in hotWord:
-                    flag = True
-                else:
-                    for w in naturalWord:
-                        if w in msg:
-                            flag = True
-                            break
+            # 群聊 匹配规则复读
+            if await listFlag(context):
+                await bot.send(context, context['message'])
+                print('群聊复读', context['group_id'], context['sender']['nickname'], context['message'])
 
-                if flag:
-                    await bot.send(context, context['message'])
-                    print(
-                        '群聊复读', context['group_id'], context['sender']['nickname'], context['message'])
+
+async def listFlag(context):
+    id = 0
+    if context['message_type'] == 'private':
+        id = context['user_id']
+    elif context['message_type'] == 'group':
+        id = context['group_id']
+    else:
+        return False
+
+    flag = False
+    # 黑白名单
+    if (not blackList or id not in blackList) and (not whiteList or id in whipyteList):
+        # 匹配规则
+        msg = context['message'].lower()
+        if msg in hotWord:
+            flag = True
+        else:
+            for w in naturalWord:
+                if w in msg:
+                    flag = True
+                    break
+    return flag
