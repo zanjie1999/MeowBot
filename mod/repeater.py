@@ -7,8 +7,13 @@
 
 whiteList = []
 blackList = []
-hotWord = ['我','草','艹','晚安','安安']
-naturalWord = ['我渴望','吾乃','之王者','辣鸡']
+hotWord = [' ', '我','你', '草', '艹', 'cao', '晚安', '安安', '还行',
+           '[cq:face,id=176]',  # 小纠结
+           '[cq:face,id=178]',  # 滑稽
+           '[cq:face,id=179]'   # 狗头
+           ]
+naturalWord = ['我渴望', '吾乃', '之王者', '辣鸡']
+
 
 async def repeater(bot, context):
     if context:
@@ -21,7 +26,7 @@ async def repeater(bot, context):
             # 黑白名单
             if (not blackList or context['group_id'] not in blackList) and (not whiteList or context['group_id'] in whiteList):
                 flag = False
-                msg = context['message']
+                msg = context['message'].lower()
                 if msg in hotWord:
                     flag = True
                 else:
@@ -32,4 +37,5 @@ async def repeater(bot, context):
 
                 if flag:
                     await bot.send(context, context['message'])
-                    print('群聊复读',context['group_id'], context['sender']['nickname'], context['message'])
+                    print(
+                        '群聊复读', context['group_id'], context['sender']['nickname'], context['message'])
