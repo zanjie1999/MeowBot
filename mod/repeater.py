@@ -7,12 +7,12 @@
 
 whiteList = []
 blackList = []
-hotWord = [' ', '我','你', '草', '艹', 'cao', '晚安', '安安', '还行',
+hotWord = [' ', '我', '你', '草', '艹', 'cao', '晚安', '安安', '还行',
            '[cq:face,id=176]',  # 小纠结
            '[cq:face,id=178]',  # 滑稽
            '[cq:face,id=179]'   # 狗头
            ]
-naturalWord = ['我渴望', '吾乃', '之王者', '辣鸡']
+naturalWord = ['我渴望', '吾乃', '之王者', '辣鸡', '没想到你是这样的']
 
 
 async def repeater(bot, context):
