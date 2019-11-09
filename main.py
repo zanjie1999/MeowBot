@@ -43,7 +43,7 @@ async def msg():
 @bot.on_message()
 async def handle_msg(context):
     # 黑白名单
-    if blackWhiteListFlag(context):
+    if await blackWhiteListFlag(context):
         return await repeater(bot, context)
 
 

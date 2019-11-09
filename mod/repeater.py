@@ -38,10 +38,10 @@ async def _listFlag(context):
     flag = False
     # 匹配规则
     msg = context['message'].lower()
-    if msg in _hotWord:
+    if msg in hotWord:
         flag = True
     else:
-        for w in _naturalWord:
+        for w in naturalWord:
             if w in msg:
                 flag = True
                 break
@@ -49,8 +49,8 @@ async def _listFlag(context):
 
 
 async def randomFlag(flag=True):
-    if _probability == 1:
+    if probability == 1:
         return flag
     if flag:
-        return random.random() < _probability
+        return random.random() < probability
     return False
