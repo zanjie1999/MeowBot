@@ -50,6 +50,6 @@ async def handle_msg(context):
 # 收到加群加好友申请
 @bot.on_request()
 async def handle_group(context):
-    await handleAdd(bot, context)
+    return await handleAdd(bot, context)
 
 bot.run(host='0.0.0.0', port=5757)
