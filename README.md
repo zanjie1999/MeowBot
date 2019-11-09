@@ -1,5 +1,5 @@
 # 喵 Bot
-一个QQ机器人 Meow Bot 喵~
+一个接入QQ的<del>机器人</del> 人工智能 Meow Bot 喵~
 
 采用酷Q的http-api进行开发
 
