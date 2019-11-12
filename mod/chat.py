@@ -6,7 +6,7 @@
 
 import jieba
 
-# from config import 
+from config import chat_rule as rule
 
 async def chat(context):
     return False
