@@ -45,7 +45,7 @@ async def msg():
 async def handle_msg(context):
     # 黑白名单
     if await blackWhiteListFlag(context):
-        return await repeater(context) or chat(context)
+        return await chat(context) or await repeater(context)
 
 
 # 收到加群加好友申请
