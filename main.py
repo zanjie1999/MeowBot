@@ -10,6 +10,7 @@ from config import myId, whiteList, blackList
 
 from mod.repeater import repeater
 from mod.handleAdd import handleAdd
+from mod.chat import chat
 
 bot = CQHttp(enable_http_post=False)
 app = bot.server_app
@@ -44,7 +45,7 @@ async def msg():
 async def handle_msg(context):
     # 黑白名单
     if await blackWhiteListFlag(context):
-        return await repeater(bot, context)
+        return await repeater(context) or chat(context)
 
 
 # 收到加群加好友申请

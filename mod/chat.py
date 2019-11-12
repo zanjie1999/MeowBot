@@ -6,3 +6,7 @@
 
 import jieba
 
+# from config import 
+
+async def chat(context):
+    return False

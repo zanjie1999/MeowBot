@@ -8,19 +8,18 @@ import random
 
 from config import repeater_hotWord as hotWord, repeater_naturalWord as naturalWord, repeater_probability as probability
 
-async def repeater(bot, context):
+
+async def repeater(context):
     if context:
         if context['message_type'] == 'private':
             # 私聊 无脑复读
             if await randomFlag():
-                # await bot.send(context, context['message'])
                 print('私聊复读', context['sender']
                       ['nickname'], context['message'])
                 return {'reply': context['message'], 'at_sender': False}
         elif context['message_type'] == 'group':
             # 群聊 匹配规则复读
             if await _listFlag(context) and await randomFlag():
-                # await bot.send(context, context['message'])
                 print(
                     '群聊复读', context['group_id'], context['sender']['nickname'], context['message'])
                 return {'reply': context['message'], 'at_sender': False}
