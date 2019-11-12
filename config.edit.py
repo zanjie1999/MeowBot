@@ -10,15 +10,15 @@ myId = 13245678
 botName = '智乃'
 
 # 号码白名单
-whiteList = []
+whiteList = ()
 
 # 号码黑名单
-blackList = []
+blackList = ()
 
 
 # 审核规则 号码. 包含的内容(任意一个)
 handleAdd_rule = {
-    13245678: ['包含', '任意内容']
+    13245678: ('包含', '任意内容')
 }
 
 
