@@ -50,7 +50,7 @@ async def handle_msg(context):
         send = await chat(context) or await repeater(context)
         if send:
             # 随机延时
-            time.sleep(random.random())
+            time.sleep(random.random() * 2)
             return send
 
 
