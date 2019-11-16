@@ -13,7 +13,7 @@ from config import chat_rule as rule,botName
 jieba.suggest_freq(botName, True)
 
 # 加载用户分词词典 可以把输入法的热词转了放进去
-jieba.load_userdict("chatDict.txt")
+jieba.load_userdict("dict.txt")
 
 async def chat(context):
     send = await findRule(context['message'])
