@@ -12,6 +12,9 @@ from config import chat_rule as rule,botName
 # 让名字绝对不会被分出来
 jieba.suggest_freq(botName, True)
 
+# 加载用户分词词典 可以把输入法的热词转了放进去
+jieba.load_userdict("chatDict.txt")
+
 async def chat(context):
     send = await findRule(context['message'])
     if send:
