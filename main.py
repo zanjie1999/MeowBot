@@ -5,6 +5,8 @@
 
 from aiocqhttp import CQHttp
 from quart import request, jsonify
+import random
+import time
 
 from config import myId, whiteList, blackList
 
@@ -45,7 +47,11 @@ async def msg():
 async def handle_msg(context):
     # 黑白名单
     if await blackWhiteListFlag(context):
-        return await chat(context) or await repeater(context)
+        send = await chat(context) or await repeater(context)
+        if send:
+            # 随机延时
+            time.sleep(random.random())
+            return send
 
 
 # 收到加群加好友申请
