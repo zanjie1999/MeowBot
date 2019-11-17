@@ -13,6 +13,7 @@ from config import myId, whiteList, blackList
 from mod.repeater import repeater
 from mod.handleAdd import handleAdd
 from mod.chat import chat
+from mod.admin import adminTool,adminToolData
 
 bot = CQHttp(enable_http_post=False)
 app = bot.server_app
@@ -47,7 +48,7 @@ async def msg():
 async def handle_msg(context):
     # 黑白名单
     if await blackWhiteListFlag(context):
-        send = await chat(context) or await repeater(context)
+        send = await adminTool(bot, context, adminToolData) or await chat(context) or await repeater(context)
         if send:
             # 随机延时
             time.sleep(random.random() * 3)
