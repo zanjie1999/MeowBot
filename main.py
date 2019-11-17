@@ -13,7 +13,7 @@ from config import myId, whiteList, blackList
 from mod.repeater import repeater
 from mod.handleAdd import handleAdd
 from mod.chat import chat
-from mod.admin import adminTool,adminToolData
+from mod.admin import admin
 
 bot = CQHttp(enable_http_post=False)
 app = bot.server_app
@@ -46,13 +46,18 @@ async def msg():
 # 收到消息
 @bot.on_message()
 async def handle_msg(context):
-    # 黑白名单
-    if await blackWhiteListFlag(context):
-        send = await adminTool(bot, context, adminToolData) or await chat(context) or await repeater(context)
-        if send:
-            # 随机延时
-            time.sleep(random.random() * 3)
-            return send
+    # 管理模块高优先级
+    adminMsg = await admin(bot, context)
+    if adminMsg:
+        return adminMsg
+    else:
+        # 黑白名单
+        if await blackWhiteListFlag(context):
+            send = await chat(context) or await repeater(context)
+            if send:
+                # 随机延时
+                time.sleep(random.random() * 3)
+                return send
 
 
 # 收到加群加好友申请
