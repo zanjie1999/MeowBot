@@ -42,7 +42,7 @@ async def at2admin(bot, context):
         tip = ''
         msgId = str(context['message_id'])
         if msgId in at:
-            tip = '{}-{}'.format(context['group_id'], msgId)
+            tip = str(context['font'])
         else:
             tip = msgId
         # 放进去
