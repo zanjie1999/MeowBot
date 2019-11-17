@@ -2,7 +2,7 @@
 
 # Sparkle Meow Bot
 # chat 聊天模块(自动回复)
-# v2.0
+# v3.0
 
 import jieba
 import random

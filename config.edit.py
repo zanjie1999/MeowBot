@@ -46,6 +46,7 @@ repeater_hotWord = (
     '[cq:face,id=169][cq:face,id=178]',  # 枪指滑稽
     '[cq:face,id=178][cq:face,id=67]',   # 滑稽心碎
     '[cq:face,id=178][cq:face,id=146]',  # 滑稽生气
+    '[ CQ : face , id = 182 ]',  # 笑哭
     '😂', '😳'
 )
 
