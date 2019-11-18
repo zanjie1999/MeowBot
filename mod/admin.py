@@ -24,7 +24,7 @@ async def admin(bot, context):
 # 我回复at  @xxx\r\n消息内容
 async def admin2at(bot, context):
     global at
-    if '@' == context['message'][0] and '\r\n' in context['message']:
+    if context['message'] and '@' == context['message'][0] and '\r\n' in context['message']:
         msg = context['message'][1:].split('\r\n', 1)
         if msg[0] in at:
             await bot.send(at[msg[0]], msg[1], at_sender=True, auto_escape=False)
