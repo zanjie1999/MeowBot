@@ -33,7 +33,7 @@ async def blackWhiteListFlag(context):
     return (not blackList or id not in blackList) and (not whiteList or id in whiteList)
 
 # 给我自己发送物联网设备的消息
-@app.route('/push')
+@app.route('/push', methods=['GET', 'POST'])
 async def msg():
     msg = request.args.get("msg")
     if msg:
