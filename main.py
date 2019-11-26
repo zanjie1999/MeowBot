@@ -35,7 +35,10 @@ async def blackWhiteListFlag(context):
 # 给我自己发送物联网设备的消息
 @app.route('/push', methods=['GET', 'POST'])
 async def msg():
-    msg = request.args.get("msg")
+    # 为什么这里不能直接  await request.form['msg']
+    form = await request.form
+    # object str can't be used in 'await' 不写异步 await request.args.get() 为何依然可用
+    msg = form['msg'] if request.method == 'POST' else request.args.get('msg') 
     if msg:
         ret = await bot.send_private_msg(user_id=myId, message=msg)
         print('Send me msg: ', msg)
