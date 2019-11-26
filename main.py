@@ -14,6 +14,7 @@ from mod.repeater import repeater
 from mod.handleAdd import handleAdd
 from mod.chat import chat
 from mod.admin import admin
+from mod.fuck import fuck
 
 bot = CQHttp(enable_http_post=False)
 app = bot.server_app
@@ -32,7 +33,7 @@ async def blackWhiteListFlag(context):
     return (not blackList or id not in blackList) and (not whiteList or id in whiteList)
 
 # 给我自己发送物联网设备的消息
-@app.route('/msg')
+@app.route('/push')
 async def msg():
     msg = request.args.get("msg")
     if msg:
@@ -46,10 +47,11 @@ async def msg():
 # 收到消息
 @bot.on_message()
 async def handle_msg(context):
-    # 管理模块高优先级
-    adminMsg = await admin(bot, context)
-    if adminMsg:
-        return adminMsg
+    # 骂人 管理 模块高优先级
+    # msg = await fuck(context) or await admin(bot, context)
+    msg = await admin(bot, context)
+    if msg:
+        return msg
     else:
         # 黑白名单
         if await blackWhiteListFlag(context):
