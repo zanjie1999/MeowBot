@@ -14,7 +14,7 @@ from config import chat_rule as rule, botName
 last = {}
 
 # 同样的内容回复时间间隔 秒
-sleepTime = 60
+sleepTime = 300
 
 # 让名字绝对不会被分出来
 jieba.suggest_freq(botName, True)
