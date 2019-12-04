@@ -13,7 +13,7 @@ fucku = [1208467214]
 
 async def fuck(context):
     if context['sender']['user_id'] in fucku :
-        time.sleep(random.random() * 3)
+        await time.sleep(random.random() * 3)
         return {'reply': random.choice(msgs), 'at_sender': False}
 
 
