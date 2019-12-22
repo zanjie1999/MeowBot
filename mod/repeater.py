@@ -20,7 +20,7 @@ async def repeater(context, id):
             # 群聊
             if context['user_id'] == myId and id in lastMsg and lastMsg[id]['my']:
                 # 我说的而且我在复读
-                if context['message'] == lastMsg[id]['my'][0] == lastMsg[id]['other'][0] or context['message'] == lastMsg[id]['other'][0] == lastMsg[id]['other'][1]:
+                if context['message'] == lastMsg[id]['my'][0] == lastMsg[id]['my'][1] or context['message'] == lastMsg[id]['my'][0] == lastMsg[id]['other'][0] or context['message'] == lastMsg[id]['other'][0] == lastMsg[id]['other'][1]:
                     print('学我复读', context['message'])
                     return {'reply': context['message'], 'at_sender': False}
             
