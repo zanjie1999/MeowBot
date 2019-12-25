@@ -81,7 +81,7 @@ async def handle_group(context):
 # 记录最后的消息
 async def _recordLastMsg(context, id):
     global lastMsg
-    if id in lastMsg and lastMsg[id]['my']:
+    if id in lastMsg and 'my' in lastMsg[id] and lastMsg[id]['my']:
         if context['user_id'] == myId:
             lastMsg[id]['my'][1] = lastMsg[id]['my'][0]
             lastMsg[id]['my'][0] = context['message']
@@ -99,7 +99,7 @@ async def _recordLastMsg(context, id):
             lastMsg[id]['other'] = [context['message'], None]
             lastMsg[id]['my'] = [None, None]
     # debug
-    print(lastMsg)
+    print(id, lastMsg[id])
 
 
 bot.run(host='0.0.0.0', port=5757)

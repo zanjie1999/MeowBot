@@ -54,7 +54,7 @@ async def findRule(context, id):
 async def chooseMsg(context, id, key, msgs):
     global lastMsg
     if context and key and msgs:
-        if id in lastMsg and lastMsg[id]['chat']:
+        if id in lastMsg and 'chat' in lastMsg[id] and lastMsg[id]['chat']:
             # 发送过消息
             if lastMsg[id]['chat'][0] == key and time.time() < lastMsg[id]['chat'][1]:
                 return False
