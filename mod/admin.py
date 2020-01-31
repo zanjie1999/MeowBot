@@ -60,7 +60,7 @@ async def at2admin(bot, context):
         # 放进去
         at[tip] = context
         # 提醒我
-        tip = '在群 {} 被 @{}\n{}({}):\n{}'.format(
+        tip = '@g{} 群中被 @{}\n{}({}):\n{}'.format(
             context['group_id'], tip, context['sender']['nickname'], context['user_id'], context['message'])
         print(tip)
         await bot.send_private_msg(user_id=myId, message=tip, auto_escape=False)
