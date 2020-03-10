@@ -22,12 +22,12 @@ async def repeater(context, id):
             # 群聊
             if id in lastMsg and 'my' in lastMsg[id] and lastMsg[id]['my']:
                 # 我说的而且我在复读
-                if context['user_id'] == myId and (context['message'] == lastMsg[id]['my'][0] == lastMsg[id]['my'][1] or context['message'] == lastMsg[id]['my'][0] == lastMsg[id]['other'][0] or context['message'] == lastMsg[id]['other'][0] == lastMsg[id]['other'][1]) or context['message'] == lastMsg[id]['my'][0] == lastMsg[id]['other'][0] == lastMsg[id]['other'][1]:
+                if await randomFlag() and context['user_id'] == myId and (context['message'] == lastMsg[id]['my'][0] == lastMsg[id]['my'][1] or context['message'] == lastMsg[id]['my'][0] == lastMsg[id]['other'][0] or context['message'] == lastMsg[id]['other'][0] == lastMsg[id]['other'][1]) or context['message'] == lastMsg[id]['my'][0] == lastMsg[id]['other'][0] == lastMsg[id]['other'][1]:
                     print('学我复读', context['message'])
                     return {'reply': context['message'], 'at_sender': False}
 
             # 匹配规则复读
-            if await listFlag(context) and await randomFlag():
+            if await randomFlag() and await listFlag(context):
                 print(
                     '群聊复读', context['group_id'], context['sender']['nickname'], context['message'])
                 return {'reply': context['message'], 'at_sender': False}
