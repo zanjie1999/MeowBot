@@ -38,13 +38,13 @@ async def findRule(context, id):
                 # 因为有些沙雕在早上说晚安，于是在需要时判断时间
                 if len(i) >= 3 and i[2] and len(i[2]) == 2:
                     th = time.localtime().tm_hour
-                    if th < i[2][0] or th > i[2][1]:
+                    if (th < i[2][0] or i[2][1] < th) if i[2][0] <= i[2][1] else (i[2][0] > th and th > i[2][1]):
                         # 时间不符的返回内容
                         if len(i) == 4 and i[3]:
                             values = i[3]
-                        else:   
+                        else:
                             continue
-                    
+
                 for key in i[0]:
                     if type(key) == str:
                         # 单词素
