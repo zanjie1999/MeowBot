@@ -34,22 +34,22 @@ async def findRule(context, id):
             # debug
             # print(' '.join(cut))
             for i in rule:
-                keys = i[0]
+                values = i[1]
                 # 因为有些沙雕在早上说晚安，于是在需要时判断时间
                 if len(i) >= 3 and i[2] and len(i[2]) == 2:
-                    int th = time.localtime().tm_hour
-                    if th < i[2][0] and i[2][1] > th:
+                    th = time.localtime().tm_hour
+                    if th < i[2][0] or i[2][1] > th:
                         # 时间不符的返回内容
                         if len(i) == 4 and i[3]:
-                            keys = i[3]
-                        else:
+                            values = i[3]
+                        else:   
                             continue
                     
-                for key in keys:
+                for key in i[0]:
                     if type(key) == str:
                         # 单词素
                         if key in cut:
-                            return await chooseMsg(context, id, key, i[1])
+                            return await chooseMsg(context, id, key, values)
                     else:
                         # 多词素
                         flag = True
@@ -58,7 +58,7 @@ async def findRule(context, id):
                                 flag = False
                                 break
                         if flag:
-                            return await chooseMsg(context, id, key, i[1])
+                            return await chooseMsg(context, id, key, values)
 
 
 # 抽取消息
