@@ -29,12 +29,12 @@ async def admin2at(bot, context):
             # 发群消息(指定群号)  @g群号\r\n消息内容
             msg = context['message'][2:].split('\r', 1)
             await bot.send_group_msg(group_id=msg[0], message=msg[1], auto_escape=False)
-            return {'reply': '群消息已发送 @g' + msg[0], 'at_sender': False}
+            return {'reply': '群消息已发送\n@g' + msg[0], 'at_sender': False}
         elif 'q' == context['message'][1]:
             # 发私聊(指定qq号)  @qQQ号\r\n消息内容
             msg = context['message'][2:].split('\r', 1)
             await bot.send_private_msg(user_id=msg[0], message=msg[1], auto_escape=False)
-            return {'reply': '私聊已发送 @q' + msg[0], 'at_sender': False}
+            return {'reply': '私聊已发送\n@q' + msg[0], 'at_sender': False}
         else:
             # 回复at  @xxx\r\n消息内容
             msg = context['message'][1:].split('\r', 1)
@@ -42,9 +42,9 @@ async def admin2at(bot, context):
                 await bot.send(at[msg[0]], msg[1], at_sender=True, auto_escape=False)
                 # 回复完就删掉啦
                 at.pop(msg[0])
-                return {'reply': '回复成功 @' + msg[0], 'at_sender': False}
+                return {'reply': '回复成功\n@' + msg[0], 'at_sender': False}
             else:
-                return {'reply': '找不到需要回复的 @' + msg[0], 'at_sender': False}
+                return {'reply': '找不到需要回复的\n@' + msg[0], 'at_sender': False}
 
 
 # 被at提醒我
@@ -60,7 +60,7 @@ async def at2admin(bot, context):
         # 放进去
         at[tip] = context
         # 提醒我
-        tip = '@g{} 群中被@{}\n{}({}):\n{}'.format(
+        tip = '@g{} 群中被@\n@{}\n{}({}):\n{}'.format(
             context['group_id'], tip, context['sender']['nickname'], context['user_id'], context['message'])
         print(tip)
         await bot.send_private_msg(user_id=myId, message=tip, auto_escape=False)
