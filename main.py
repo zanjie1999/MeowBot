@@ -63,7 +63,7 @@ async def handle_msg(context):
                 # 黑白名单
                 if await blackWhiteListFlag(context):
                     msg = await chat(context, id) or await repeater(context, id)
-                    if msg:
+                    if msg and msg != 'sparkle.nomsg':
                         # 为了不被识破 随机延时
                         await asyncio.sleep(random.random() * 10 + 1)
 
