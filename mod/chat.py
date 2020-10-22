@@ -68,7 +68,7 @@ async def chooseMsg(context, id, key, msgs):
         if id in lastMsg and 'chat' in lastMsg[id] and lastMsg[id]['chat']:
             # 发送过消息
             if lastMsg[id]['chat'][0] == key and time.time() < lastMsg[id]['chat'][1]:
-                return True
+                return 'sparkle.nomsg'
         else:
             if id not in lastMsg:
                 lastMsg[id] = {}
