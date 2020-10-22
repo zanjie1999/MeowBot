@@ -37,21 +37,21 @@ async def admin2at(bot, context):
     if context['message'] and '@' == context['message'][0] and '\r' in context['message']:
         if 'g' == context['message'][1]:
             # 发群消息(指定群号)  @g群号\r\n消息内容
-            msg = splitrn(context['message'][2:])
+            msg = await splitrn(context['message'][2:])
             if len(msg) == 1:
                 return {'reply': '格式有误\n@g群号\n消息内容', 'at_sender': False}
             await bot.send_group_msg(group_id=msg[0], message=msg[1], auto_escape=False)
             return {'reply': '群消息已发送\n@g' + msg[0], 'at_sender': False}
         elif 'q' == context['message'][1]:
             # 发私聊(指定qq号)  @qQQ号\r\n消息内容
-            msg = splitrn(context['message'][2:]))
+            msg = await splitrn(context['message'][2:])
             if len(msg) == 1:
                 return {'reply': '格式有误\n@qQQ号\n消息内容', 'at_sender': False}
             await bot.send_private_msg(user_id=msg[0], message=msg[1], auto_escape=False)
             return {'reply': '私聊已发送\n@q' + msg[0], 'at_sender': False}
         else:
             # 回复at  @xxx\r\n消息内容
-            msg = splitrn(context['message'][2:])
+            msg = await splitrn(context['message'][2:])
             if len(msg) == 1:
                 return {'reply': '格式有误\n@xxx\n消息内容', 'at_sender': False}
             if msg[0] in at:
