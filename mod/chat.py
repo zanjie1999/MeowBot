@@ -19,6 +19,8 @@ jieba.load_userdict("dict.txt")
 
 async def chat(context, id):
     send = await findRule(context, id)
+    if send == 'sparkle.nomsg':
+        return 'sparkle.nomsg'
     if send:
         print('聊天', context['sender']['nickname'],
               context['message'], '\n回复', send)
