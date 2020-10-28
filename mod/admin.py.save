@@ -4,6 +4,7 @@
 # admin 管理模块
 # v1.0
 
+import re
 from config import myId
 
 # 被at的数据
@@ -21,39 +22,23 @@ async def admin(bot, context):
             return await at2admin(bot, context)
 
 
-# 按\r或\n分割
-async def splitrn(msg):
-    out = msg.split('\r', 1)
-    if len(out) == 1:
-        out = msg.split('\n', 1)
-    if len(out) == 1:
-        out = msg.split('\r\n', 1)
-    return out
-
-
 # 我发消息  方便就写在一起了
 async def admin2at(bot, context):
     global at
     if context['message'] and '@' == context['message'][0] and ('\r' in context['message'] or '\n' in context['message']):
         if 'g' == context['message'][1]:
             # 发群消息(指定群号)  @g群号\r\n消息内容
-            msg = await splitrn(context['message'][2:])
-            if len(msg) == 1:
-                return {'reply': '格式有误\n@g群号\n消息内容', 'at_sender': False}
+            msg = context['message'][2:].split('\r', 1)
             await bot.send_group_msg(group_id=msg[0], message=msg[1], auto_escape=False)
             return {'reply': '群消息已发送\n@g' + msg[0], 'at_sender': False}
         elif 'q' == context['message'][1]:
             # 发私聊(指定qq号)  @qQQ号\r\n消息内容
-            msg = await splitrn(context['message'][2:])
-            if len(msg) == 1:
-                return {'reply': '格式有误\n@qQQ号\n消息内容', 'at_sender': False}
+            msg = context['message'][2:].split('\r', 1)
             await bot.send_private_msg(user_id=msg[0], message=msg[1], auto_escape=False)
             return {'reply': '私聊已发送\n@q' + msg[0], 'at_sender': False}
         else:
             # 回复at  @xxx\r\n消息内容
-            msg = await splitrn(context['message'][2:])
-            if len(msg) == 1:
-                return {'reply': '格式有误\n@xxx\n消息内容', 'at_sender': False}
+            msg = context['message'][1:].split('\r', 1)
             if msg[0] in at:
                 await bot.send(at[msg[0]], msg[1], at_sender=True, auto_escape=False)
                 # 回复完就删掉啦
