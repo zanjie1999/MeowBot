@@ -66,7 +66,7 @@ async def admin2at(bot, context):
     global at
     global send_next_msg_to_group
     if context['message'] and  '@' == context['message'][0]:
-        if len(context['message'][0]) < 2:
+        if len(context['message']) < 2:
             if send_next_msg_to_group['flag']:
                 send_next_msg_to_group['flag'] = False
                 return {'reply': '发送消息操作已取消', 'at_sender': False}
@@ -75,10 +75,10 @@ async def admin2at(bot, context):
                 # 内含消息内容 割出来发出去
                 if 'g' == context['message'][1] or 'q' == context['message'][1]:
                     msg = await splitrn(context['message'][2:])
-                    await adminSend(bot, context['message'][1], msg[0], msg[1])
+                    return await adminSend(bot, context['message'][1], msg[0], msg[1])
                 else:
                     msg = await splitrn(context['message'][1:])
-                    await adminSend(bot, None, msg[0], msg[1])
+                    return await adminSend(bot, None, msg[0], msg[1])
             else:
                 # 记录当前指定的发送消息对象 下一条是消息内容
                 sendType = ''
@@ -100,8 +100,9 @@ async def admin2at(bot, context):
         if send_next_msg_to_group['time'] < time.time():
            send_next_msg_to_group['flag'] = False 
         else:
-            await adminSend(bot, send_next_msg_to_group['type'], send_next_msg_to_group['id'], context['message'])
             send_next_msg_to_group['flag'] = False 
+            return await adminSend(bot, send_next_msg_to_group['type'], send_next_msg_to_group['id'], context['message'])
+            
             
 
 
