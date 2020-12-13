@@ -62,6 +62,9 @@ repeater_naturalWord = ('吾乃', '辣鸡', '没想到你是这样的')
 # 复读机 复读几率 0-1
 repeater_probability = 0.3
 
+# 下一条消息发到指定群功能超时时间 
+send_next_msg_to_group_plus_time = 30
+
 
 # 全局变量
 # 记录最后的消息内容  {id:{'my':[], 'other':[], 'chat':[]}}
