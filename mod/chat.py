@@ -54,13 +54,14 @@ async def findRule(context, id):
                             return await chooseMsg(context, id, key, values)
                     else:
                         # 多词素
-                        flag = True
-                        for k in key:
-                            if k not in cut:
-                                flag = False
-                                break
-                        if flag:
-                            return await chooseMsg(context, id, key, values)
+                        haveNum = 0
+                        for w in cut:
+                            if w == key[haveNum]:
+                                # 有当前词素 下次匹配下一个
+                                haveNum = haveNum +1
+                                if haveNum == len(key):
+                                    # 在分的词用完之前找全了所有词素 匹配成功
+                                    return await chooseMsg(context, id, key, values)                            
 
 
 # 抽取消息
